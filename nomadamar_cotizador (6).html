@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomadamar Cotizador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f6f5f3;
+            color: #333;
+        }
+        header {
+            background: #071821;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .section {
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            color: #0b4b5c;
+            font-size: 1.5rem;
+        }
+        label {
+            display: block;
+            margin: 12px 0 4px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .checkbox-group label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        button {
+            background: #0b4b5c;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #0d6a80;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Nomadamar</h1>
+    <p>Arte, movimiento y océano hecho a mano</p>
+    <!-- Logo insertado -->
+    <!-- La imagen se referencia como archivo local. Asegúrate de hospedar 'logo_nomadamar.jpg' junto al HTML -->
+    <img src="logo_nomadamar.jpg" alt="Logo Nomadamar" style="max-width:200px; margin: 15px auto; display: block;">
+</header>
+
+<main>
+    <section class="section">
+        <h2>Selecciona tu producto</h2>
+        <label for="producto">Producto:</label>
+        <select id="producto" required>
+            <option value="">-- Elegir --</option>
+            <option value="balance">Balance Board Nomadamar</option>
+            <option value="longboard">Longboard decorativo</option>
+            <option value="quilla">Quilla decorativa</option>
+            <option value="mural">Mural (Árbol de la vida / Mandala / Flor de loto)</option>
+            <option value="llavero">Llavero grabado</option>
+            <option value="vaso">Vaso reciclado grabado</option>
+            <option value="polera">Polera Nomadamar</option>
+            <option value="personalizado">Producto personalizado</option>
+        </select>
+        
+        <div id="tamanos" style="display:none;">
+            <label for="tamano">Tamaño:</label>
+            <select id="tamano">
+                <option value="">-- Elegir --</option>
+                <option value="small">Pequeño</option>
+                <option value="medium">Mediano</option>
+                <option value="large">Grande</option>
+            </select>
+        </div>
+
+        <label for="diseno">Modelo de corte de la tabla:</label>
+        <select id="diseno">
+            <option value="fish">Fish</option>
+            <option value="longboard">Longboard</option>
+            <option value="malibu">Malibú</option>
+        </select>
+        
+        <!-- Opciones de personalización básicas -->
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="grabado"> ¿Desea grabado?</label>
+            <label><input type="checkbox" id="frase"> ¿Desea frase personalizada?</label>
+            <label><input type="checkbox" id="nombre"> ¿Desea nombre personalizado?</label>
+            <label><input type="checkbox" id="dibujo"> ¿Desea dibujo natural?</label>
+            <label><input type="checkbox" id="disenopersonal"> ¿Desea diseño completamente personalizado?</label>
+        </div>
+
+        <!-- Modelo de tabla: aparece solo para balance boards -->
+        <div id="modeloDiv" style="display:none;">
+            <label for="modelo">Modelo de tabla:</label>
+            <select id="modelo">
+                <option value="">-- Elegir --</option>
+                <option value="fish">Fish</option>
+                <option value="longboard">Longboard</option>
+                <option value="malibu">Malibú</option>
+            </select>
+        </div>
+        
+        <!-- Fondo decorativo -->
+        <label for="fondo">Fondo:</label>
+        <select id="fondo">
+            <option value="">-- Elegir --</option>
+            <option value="fantasia">Fantasía</option>
+            <option value="oceano">Océano</option>
+            <option value="templos">Templos</option>
+            <option value="galaxia">Galaxia</option>
+            <option value="planetas">Planetas</option>
+            <option value="animales">Animales de mar</option>
+            <option value="botes">Botes</option>
+        </select>
+        <!-- Entrada de animal marino: solo si el fondo es animales -->
+        <div id="animalDiv" style="display:none;">
+            <label for="animal">Especifique animal marino:</label>
+            <input type="text" id="animal">
+        </div>
+        
+        <!-- Colores de línea superior -->
+        <label for="linea">Color de líneas (spray) - puedes elegir múltiples:</label>
+        <select id="linea" multiple>
+            <optgroup label="Colores básicos y claros">
+                <option value="blanco">Blanco</option>
+                <option value="negro">Negro</option>
+                <option value="cafe">Café</option>
+                <option value="gris">Gris</option>
+            </optgroup>
+            <optgroup label="Colores vivos y especiales">
+                <option value="rojo">Rojo</option>
+                <option value="azul">Azul</option>
+                <option value="amarillo">Amarillo</option>
+                <option value="verde">Verde</option>
+                <option value="rosado">Rosado</option>
+                <option value="morado">Morado</option>
+                <option value="naranja">Naranja</option>
+            </optgroup>
+            <optgroup label="Efectos y metalizados">
+                <option value="azulMetalico">Azul Metálico</option>
+                <option value="dorado">Dorado</option>
+                <option value="plateado">Plateado</option>
+                <option value="transparente">Transparente</option>
+            </optgroup>
+        </select>
+        
+        <!-- Pintado -->
+        <label for="pintadoSelect">Pintado:</label>
+        <select id="pintadoSelect">
+            <option value="no">No</option>
+            <option value="simple">Simple</option>
+            <option value="avanzado">Avanzado</option>
+        </select>
+        
+        <!-- Productos adicionales -->
+        <label for="productosExtra">Producto adicional (puedes seleccionar más de uno):</label>
+        <select id="productosExtra" multiple>
+            <option value="rodillo">Rodillo de corcho</option>
+            <option value="baseOla">Base de ola</option>
+            <option value="quillaExtra">Quilla decorativa</option>
+            <option value="llaveroExtra">Llavero grabado</option>
+            <option value="vasoExtra">Vaso grabado</option>
+            <option value="poleraExtra">Polera</option>
+            <option value="packagingPremium">Packaging premium</option>
+        </select>
+        
+        <!-- Nivel de personalización -->
+        <label for="nivelPersonalizacion">Nivel de personalización:</label>
+        <select id="nivelPersonalizacion">
+            <option value="basico">Básico</option>
+            <option value="pro">Pro</option>
+            <option value="elite">Elite</option>
+        </select>
+
+        <!-- Tamaño del diseño -->
+        <label for="tamanoDiseno">Tamaño del diseño (máx. 40x40 cm por pieza):</label>
+        <input type="text" id="tamanoDiseno" placeholder="Ej: 30x40 cm">
+        
+        <!-- Código de descuento -->
+        <label for="codigoDescuento">Código de descuento:</label>
+        <input type="text" id="codigoDescuento">
+        
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" value="1" min="1">
+        
+        <label for="comuna">Comuna/Región:</label>
+        <input type="text" id="comuna">
+        
+        <label for="comentarios">Comentarios adicionales:</label>
+        <textarea id="comentarios" rows="4"></textarea>
+        
+        <button onclick="calcular()">Calcular presupuesto</button>
+        
+        <div id="resultado"></div>
+        <div id="whatsappLink"></div>
+    </section>
+</main>
+
+<script>
+// Precios base por producto
+const preciosBase = {
+    balance: 69990,           // base para balance board modelo Fish
+    longboard: 49990,         // longboard decorativo
+    quilla: 19990,            // quilla decorativa
+    mural: 29990,             // mural pequeño (base)
+    llavero: 3990,            // llavero grabado
+    vaso: 7990,               // vaso reciclado grabado
+    polera: 14990,            // polera Nomadamar
+    personalizado: 0          // valor a definir para producto personalizado
+};
+
+// Costos adicionales por extras y personalizaciones
+const extras = {
+    grabado: 8000,
+    frase: 5000,
+    nombre: 5000,
+    dibujo: 15000,
+    disenopersonal: 25000
+};
+
+// Costos por nivel de personalización
+const nivelesPersonalizacion = {
+    basico: 0,
+    pro: 20000,
+    elite: 40000
+};
+
+// Costos adicionales por productos extras
+const productosExtrasCostos = {
+    rodillo: 25000,
+    baseOla: 20000,
+    quillaExtra: 19990,
+    llaveroExtra: 3990,
+    vasoExtra: 7990,
+    poleraExtra: 14990,
+    packagingPremium: 8000
+};
+
+// Costos adicionales por modelo de balance board
+const modelosBalanceCostos = {
+    fish: 0,
+    longboard: 5000,
+    malibu: 10000
+};
+
+// Costos adicionales por tamaño de mural
+const tamanosMuralCostos = {
+    small: 0,
+    medium: 20000,
+    large: 60000
+};
+
+// Costos por pintado (desde select)
+const pintadoCostos = {
+    no: 0,
+    simple: 15000,
+    avanzado: 30000
+};
+
+// Costos de envío aproximados por región (basados en tarifas Starken para paquetes
+// de hasta 1 kg). Estos valores se aplican internamente y no se muestran al cliente.
+// Se utilizan en la función calcularCostoEnvio() para sumar el costo de despacho
+// según la comuna/región ingresada.
+const costosEnvioRegion = {
+    metropolitana: 4400,      // Región Metropolitana / Santiago
+    maule: 3170,              // Maule (Curicó y alrededores)
+    centro_sur: 4400,         // Coquimbo, Valparaíso, O'Higgins, Ñuble, Biobío, Araucanía, Los Ríos, Los Lagos, Atacama
+    extremo_norte: 5330,      // Antofagasta, Tarapacá, Arica y Parinacota
+    extremo_austral: 5620     // Aysén, Magallanes
+};
+
+// Devuelve un costo de envío estimado según la comuna/ región ingresada.
+// Si no coincide con ningún grupo, se utiliza el valor para centro_sur (promedio general).
+function calcularCostoEnvio(comuna) {
+    if (!comuna) return 0;
+    const c = comuna.toLowerCase();
+    // Metropolitana / Santiago
+    if (c.includes('santiago') || c.includes('metropolitana')) {
+        return costosEnvioRegion.metropolitana;
+    }
+    // Maule
+    if (c.includes('maule') || c.includes('curicó')) {
+        return costosEnvioRegion.maule;
+    }
+    // Centro / Sur: Coquimbo, Valparaíso, O'Higgins, Ñuble, Biobío, Araucanía, Los Ríos, Los Lagos, Atacama
+    const regionesCentroSur = ['coquimbo','valparaíso','valparaiso','o\'higgins','nuble','ñuble','biobío','biobio','araucanía','araucania','los ríos','los rios','los lagos','atacama'];
+    for (const r of regionesCentroSur) {
+        if (c.includes(r)) return costosEnvioRegion.centro_sur;
+    }
+    // Extremo Norte: Antofagasta, Tarapacá, Arica, Parinacota
+    const regionesNorte = ['antofagasta','tarapacá','tarapaca','arica','parinacota'];
+    for (const r of regionesNorte) {
+        if (c.includes(r)) return costosEnvioRegion.extremo_norte;
+    }
+    // Extremo Austral: Aysén, Magallanes
+    const regionesSur = ['aysén','aysen','magallanes'];
+    for (const r of regionesSur) {
+        if (c.includes(r)) return costosEnvioRegion.extremo_austral;
+    }
+    // Si no coincide con nada, retorno centro_sur como aproximado
+    return costosEnvioRegion.centro_sur;
+}
+
+// Mostrar/ocultar tamaño de mural y modelo de balance board
+document.getElementById('producto').addEventListener('change', () => {
+    const prod = document.getElementById('producto').value;
+    const tamanosDiv = document.getElementById('tamanos');
+    const modeloDiv = document.getElementById('modeloDiv');
+    // Mostrar selector de tamaños solo si el producto es mural
+    if (prod === 'mural') {
+        tamanosDiv.style.display = 'block';
+    } else {
+        tamanosDiv.style.display = 'none';
+    }
+    // Mostrar selector de modelo solo si es balance board
+    if (prod === 'balance') {
+        modeloDiv.style.display = 'block';
+    } else {
+        modeloDiv.style.display = 'none';
+    }
+});
+
+// Mostrar/ocultar campo de animal cuando se elija fondo "animales de mar"
+document.getElementById('fondo').addEventListener('change', () => {
+    const fondo = document.getElementById('fondo').value;
+    const animalDiv = document.getElementById('animalDiv');
+    if (fondo === 'animales') {
+        animalDiv.style.display = 'block';
+    } else {
+        animalDiv.style.display = 'none';
+    }
+});
+
+// Formato de moneda chilena
+function formatoCLP(numero) {
+    return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(numero);
+}
+
+function calcular() {
+    const producto = document.getElementById('producto').value;
+    if (!producto) {
+        alert('Por favor elige un producto');
+        return;
+    }
+    const cantidad = parseInt(document.getElementById('cantidad').value) || 1;
+    let total = preciosBase[producto] || 0;
+    let detallesExtras = [];
+
+    // Ajustes según modelo de tabla (solo para balance board)
+    if (producto === 'balance') {
+        const modelo = document.getElementById('modelo').value;
+        if (modelo) {
+            total += modelosBalanceCostos[modelo] || 0;
+            detallesExtras.push(`Modelo: ${modelo}`);
+        }
+    }
+
+    // Ajustes según tamaño de mural
+    if (producto === 'mural') {
+        const tamano = document.getElementById('tamano').value;
+        if (tamano) {
+            total += tamanosMuralCostos[tamano] || 0;
+            detallesExtras.push(`Tamaño: ${tamano}`);
+        }
+    }
+
+    // Diseños básicos y opciones de contenido
+    const diseno = document.getElementById('diseno').value;
+    let disenoDesc = '';
+    // El diseño base ahora se refiere al modelo de corte de la tabla
+    switch(diseno) {
+        case 'fish': disenoDesc = 'Fish'; break;
+        case 'longboard': disenoDesc = 'Longboard'; break;
+        case 'malibu': disenoDesc = 'Malibú'; break;
+    }
+
+    // Extras de personalización básicos (checkboxes)
+    if (document.getElementById('grabado').checked) {
+        total += extras.grabado;
+        detallesExtras.push('Grabado láser');
+    }
+    if (document.getElementById('frase').checked) {
+        total += extras.frase;
+        detallesExtras.push('Frase personalizada');
+    }
+    if (document.getElementById('nombre').checked) {
+        total += extras.nombre;
+        detallesExtras.push('Nombre personalizado');
+    }
+    if (document.getElementById('dibujo').checked) {
+        total += extras.dibujo;
+        detallesExtras.push('Dibujo natural');
+    }
+    if (document.getElementById('disenopersonal').checked) {
+        total += extras.disenopersonal;
+        detallesExtras.push('Diseño completamente personalizado');
+    }
+
+    // Fondo decorativo
+    const fondo = document.getElementById('fondo').value;
+    let fondoDesc = '';
+    if (fondo) {
+        fondoDesc = fondo;
+        if (fondo === 'animales') {
+            const animal = document.getElementById('animal').value.trim();
+            if (animal) {
+                fondoDesc += ` - ${animal}`;
+            }
+        }
+    }
+
+    // Colores de líneas superiores (spray)
+    const lineaSelect = document.getElementById('linea');
+    const colores = Array.from(lineaSelect.selectedOptions).map(opt => opt.text);
+    let coloresDesc = '';
+    if (colores.length > 0) {
+        coloresDesc = colores.join(', ');
+    }
+
+    // Pintado (select)
+    const pintado = document.getElementById('pintadoSelect').value;
+    total += pintadoCostos[pintado] || 0;
+    let pintadoDesc = '';
+    switch(pintado) {
+        case 'simple': pintadoDesc = 'Pintado simple'; break;
+        case 'avanzado': pintadoDesc = 'Pintado avanzado'; break;
+        default: pintadoDesc = 'Sin pintado'; break;
+    }
+
+    // Productos adicionales
+    const productosExtraSelect = document.getElementById('productosExtra');
+    const productosSeleccionados = Array.from(productosExtraSelect.selectedOptions).map(opt => opt.value);
+    const productosExtraDesc = [];
+    productosSeleccionados.forEach(item => {
+        total += productosExtrasCostos[item] || 0;
+        // Descripciones legibles para el mensaje de WhatsApp
+        switch(item) {
+            case 'rodillo': productosExtraDesc.push('Rodillo de corcho'); break;
+            case 'baseOla': productosExtraDesc.push('Base de ola'); break;
+            case 'quillaExtra': productosExtraDesc.push('Quilla decorativa'); break;
+            case 'llaveroExtra': productosExtraDesc.push('Llavero grabado'); break;
+            case 'vasoExtra': productosExtraDesc.push('Vaso grabado'); break;
+            case 'poleraExtra': productosExtraDesc.push('Polera'); break;
+            case 'packagingPremium': productosExtraDesc.push('Packaging premium'); break;
+        }
+    });
+
+    // Nivel de personalización
+    const nivel = document.getElementById('nivelPersonalizacion').value;
+    total += nivelesPersonalizacion[nivel] || 0;
+    let nivelDesc = '';
+    switch(nivel) {
+        case 'pro': nivelDesc = 'Pro'; break;
+        case 'elite': nivelDesc = 'Elite'; break;
+        default: nivelDesc = 'Básico'; break;
+    }
+
+    // Cantidad total multiplicada
+    total *= cantidad;
+
+    // Descuento por código
+    const codigo = document.getElementById('codigoDescuento').value.trim().toUpperCase();
+    let descuentoAplicado = 0;
+    let descuentoDesc = '';
+    // Aplica descuento si el código es válido y el monto cumple el mínimo
+    if (codigo === 'NOMADA10' && total >= 50000) {
+        descuentoAplicado = 0.10;
+        descuentoDesc = '10% de descuento aplicado';
+    } else if (codigo === 'NOMADA20' && total >= 100000) {
+        descuentoAplicado = 0.20;
+        descuentoDesc = '20% de descuento aplicado';
+    }
+    const totalConDescuento = Math.round(total * (1 - descuentoAplicado));
+
+    // Antes de calcular el envío, obtenemos la comuna/ región ingresada
+    const comuna = document.getElementById('comuna').value.trim();
+    const comentarios = document.getElementById('comentarios').value.trim();
+    // Calcular costo de envío en base a la comuna. Se aplica una sola vez por pedido,
+    // sin multiplicar por cantidad. El cliente no verá el costo de envío desglosado.
+    const shippingCost = calcularCostoEnvio(comuna);
+
+    // Total final a pagar (producto + personalizaciones - descuentos + envío)
+    const totalFinal = totalConDescuento + shippingCost;
+
+    // Mostrar resultado en la página con detalle de subtotal, descuentos y envío
+    let resultadoTexto = `Subtotal: ${formatoCLP(total)}`;
+    if (descuentoAplicado > 0) {
+        resultadoTexto += `<br>Descuento: -${(descuentoAplicado*100).toFixed(0)}%`;
+        resultadoTexto += `<br>Subtotal con descuento: ${formatoCLP(totalConDescuento)}`;
+    } else {
+        // Sin descuento, mostrar el subtotal sin modificación (totalConDescuento es igual a total)
+        resultadoTexto += `<br>Subtotal sin descuento: ${formatoCLP(totalConDescuento)}`;
+    }
+    // Mostrar costo de envío de forma separada
+    resultadoTexto += `<br>Costo de envío: ${formatoCLP(shippingCost)}`;
+    // Mostrar total final (incluye envío)
+    resultadoTexto += `<br>Total final: ${formatoCLP(totalFinal)}`;
+    document.getElementById('resultado').innerHTML = resultadoTexto;
+
+    // Datos adicionales ya recogidos (comuna y comentarios)
+    // Calcular tiempo estimado de fabricación según nivel de personalización
+    // Basico mantiene 2 días; Pro y Elite requieren más detalle y se estiman en 2‑3 días.
+    const tiemposPersonalizacion = {
+        basico: '2 días (corte, grabado y pintura + empaquetado)',
+        pro: '2‑3 días (corte, grabado y pintura + empaquetado)',
+        elite: '2‑3 días (corte, grabado y pintura + empaquetado)'
+    };
+    const tiempoEstimado = tiemposPersonalizacion[nivel] || '2 días';
+
+    // Tamaño del diseño
+    const tamanoDiseno = document.getElementById('tamanoDiseno').value.trim();
+
+    // Construir mensaje
+    let mensaje = 'Hola Nomadamar, quiero cotizar:\n';
+    mensaje += `Producto: ${document.getElementById('producto').selectedOptions[0].text}\n`;
+    if (producto === 'balance') {
+        const modelo = document.getElementById('modelo').value;
+        if (modelo) mensaje += `Modelo de tabla: ${modelo}\n`;
+    }
+    if (producto === 'mural') {
+        const tamano = document.getElementById('tamano').value;
+        if (tamano) mensaje += `Tamaño: ${tamano}\n`;
+    }
+    // Incluir tamaño del diseño personalizado si se especifica
+    if (tamanoDiseno) mensaje += `Tamaño del diseño: ${tamanoDiseno}\n`;
+    mensaje += `Cantidad: ${cantidad}\n`;
+    mensaje += `Modelo de corte: ${disenoDesc || 'N/A'}\n`;
+    if (fondoDesc) mensaje += `Fondo: ${fondoDesc}\n`;
+    if (coloresDesc) mensaje += `Líneas color: ${coloresDesc}\n`;
+    mensaje += `Pintado: ${pintadoDesc}\n`;
+    mensaje += `Nivel de personalización: ${nivelDesc}\n`;
+    if (productosExtraDesc.length > 0) mensaje += `Productos adicionales: ${productosExtraDesc.join(', ')}\n`;
+    if (detallesExtras.length > 0) mensaje += `Extras: ${detallesExtras.filter(d => !d.startsWith('Modelo') && !d.startsWith('Tamaño')).join(', ')}\n`;
+    if (codigo) mensaje += `Código de descuento: ${codigo}\n`;
+    // Subtotal sin descuento (total), descuento aplicado y subtotal con descuento
+    mensaje += `\nSubtotal: ${formatoCLP(total)}`;
+    if (descuentoAplicado > 0) {
+        mensaje += `\nDescuento aplicado: ${(descuentoAplicado*100).toFixed(0)}%`;
+        mensaje += `\nSubtotal con descuento: ${formatoCLP(totalConDescuento)}`;
+    } else {
+        mensaje += `\nSubtotal sin descuento: ${formatoCLP(totalConDescuento)}`;
+    }
+    // Costo de envío separado
+    mensaje += `\nCosto de envío: ${formatoCLP(shippingCost)}`;
+    // Total final con envío
+    mensaje += `\nTotal final: ${formatoCLP(totalFinal)}`;
+    // Incluir tiempo estimado en el mensaje (según nivel de personalización)
+    mensaje += `\nTiempo estimado: ${tiempoEstimado}`;
+    // Comuna/región y comentarios
+    mensaje += `\nComuna/Región: ${comuna || 'N/A'}`;
+    mensaje += `\nComentarios: ${comentarios || 'Ninguno'}`;
+
+    // Enviar mensaje por WhatsApp con el número configurado
+    const numeroWhatsApp = '56930923458';
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    document.getElementById('whatsappLink').innerHTML = `<p><a href="${url}" target="_blank">Enviar cotización por WhatsApp</a></p>`;
+}
+</script>
+
+</body>
+</html>
